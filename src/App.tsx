@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect} from 'react';
 import './App.css';
+import Testing from "./components/Testing";
+import {useLoading} from "./Hooks/loading";
 
 function App() {
+    const { setLoading } = useLoading()
+    useEffect(()=>{
+        if (setLoading) {
+            setLoading(true);
+            setTimeout(() => {
+                setLoading(false);
+                setTimeout(()=>{
+                    setLoading(true);
+                    setTimeout(()=>{
+                        setLoading(false);
+                    },3003)
+                },3000)
+            }, 3000)
+        }
+
+    },[setLoading])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Testing>
+          <div className="App">
+              <h1>Done</h1>
+          </div>
+      </Testing>
   );
 }
 
